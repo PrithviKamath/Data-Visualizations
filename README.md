@@ -1,3 +1,3 @@
 # Visualizations
 
-This repository would contain visualizations using Tableau, PowerBi and Qlik Sence
+This repository would contain visualizations using Tableau, PowerBI and Qlik Sence
