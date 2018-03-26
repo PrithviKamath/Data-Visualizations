@@ -16,8 +16,8 @@
 <b>Conclusion</b>: We observe from the trend that Region 4 containg states Alabama, Florida, Georgia, Kentucky, Mississippi, North Carolina, South Carolina, Tennessee have a higheest number of deaths compared to others. Since this is a 10 year trend we can conclude that these deaths are not due to seasonal weather changes or other seasonal factors.</br  >
 </br  >
 <b>Analysis 4</b>: Get the total deaths and percentage of deaths across Region 4.</br  >
-<img src=https://github.com/PrithviKamath/Visualizations/blob/master/Pneunomia%20Deaths%20Rate%20Visualization%20with%20Tabluea/Images/Region%204%20Total%20Deaths.png</img></br  >
-<img src=https://github.com/PrithviKamath/Visualizations/blob/master/Pneunomia%20Deaths%20Rate%20Visualization%20with%20Tabluea/Images/Region%204%20Percentage%20Deaths.png</img></br  >
+<img src=https://github.com/PrithviKamath/Visualizations/blob/master/Pneunomia%20Deaths%20Rate%20Visualization%20with%20Tabluea/Images/Region%204%20Total%20Deaths.png></img></br  >
+<img src=https://github.com/PrithviKamath/Visualizations/blob/master/Pneunomia%20Deaths%20Rate%20Visualization%20with%20Tabluea/Images/Region%204%20Percentage%20Deaths.png></img></br  >
 <b>Conclusion</b>: Since we have analyzed that Region 4 is most vulnerable, we drill further to perform state-wise analysis. Also, since Florida has the highest population amongst the states in the region, getting a sum of the count of deaths could be misleading. Hence we analyse with percentage of deaths across the state.</br  >
 </br  >
 <b>Dashboard 1</b></br  >
