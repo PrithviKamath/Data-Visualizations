@@ -3,6 +3,7 @@
 <b>Dataset</b>: Record of deaths caused by pneumonia and influenza in US across 10 years from 2009 to 2018.</br  >
 </br  >
 <b>Analysis 1</b>: Get a general idea about the data by plotting a time line on a national level.</br  >
+<img src=https://github.com/PrithviKamath/Visualizations/blob/master/Pneunomia%20Deaths%20Rate%20Visualization%20with%20Tabluea/Images/National%20Time%20Series.png></img>
 <b>Conclusion</b>: We observe that there is a rise of deaths due to pneumonia and influenza during the begining of the year. This trend gradually decreases as the climate becomes less extreme.</br  >
 </br  >
 <b>Analysis 2</b>: Get a distribution of deaths by age group.</br  >
@@ -14,7 +15,7 @@
 <b>Analysis 4</b>: Get the total deaths and percentage of deaths across Region 4.</br  >
 <b>Conclusion</b>: Since we have analyzed that Region 4 is most vulnerable, we drill further to perform state-wise analysis. Also, since Florida has the highest population amongst the states in the region, getting a sum of the count of deaths could be misleading. Hence we analyse with percentage of deaths across the state.</br  >
 </br  >
-Dashboard 1</br  >
+<b>Dashboard 1</b></br  >
 </br  >
 <b>Analysis 5</b>: Get the number of beds in all hospitals in all states in Region 4.</br  >
 <b>Conclusion</b>: The total number of hospital beds in Florida is greater than other states in the same Region by a big margin.</br  >
