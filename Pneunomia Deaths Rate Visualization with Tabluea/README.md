@@ -1,6 +1,6 @@
 # Data Visualization on Health and Human Services
-<br/ >
-<b>Dataset</b>: Record of deaths caused by pneumonia and influenza in US across 10 years from 2009 to 2018.<br/ >
+<br/  ><br/  >
+<b>Dataset</b>: Record of deaths caused by pneumonia and influenza in US across 10 years from 2009 to 2018.<br/  >
 
 <b>Analysis 1</b>: Get a general idea about the data by plotting a time line on a national level.
 Conclusion: We observe that there is a rise of deaths due to pneumonia and influenza during the begining of the year. This trend gradually decreases as the climate becomes less extreme.
