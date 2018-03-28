@@ -1,6 +1,6 @@
-# Data Visualization on Health and Human Services
+# Tableau Visualization on Health and Human Services
 </br  >
-<b>Dataset</b>: Record of deaths caused by pneumonia and influenza in US across 10 years from 2009 to 2018.</br  >
+<b>Dataset</b>: Weekly records of deaths caused by pneumonia and influenza in US across 10 years from 2009 to 2018.</br  >
 </br  >
 <b>Analysis 1</b>: Get a general idea about the data by plotting a time line on a national level.</br  >
 <img src=https://github.com/PrithviKamath/Visualizations/blob/master/Pneunomia%20Deaths%20Rate%20Visualization%20with%20Tabluea/Images/National%20Time%20Series.png></img></br  >
