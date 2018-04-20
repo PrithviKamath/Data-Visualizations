@@ -21,4 +21,4 @@
 <b>Dashboard</b></br >
 <img src='https://github.com/PrithviKamath/Data-Visualizations/blob/master/Southern%20Zambia%20Malaria%20Case%20Visualization%20with%20Tableau/Images/Malaria%20Cases%20in%20Southern%20Zambia%20(2014-2018).png'></img></br >
 <b>References</b></br>
-<b>Dataset</b>:https://data.world/makeovermonday/2018w16-zambia-southern-province-confirmed-malaria-cases</br  >
+<b>Dataset</b>: https://data.world/makeovermonday/2018w16-zambia-southern-province-confirmed-malaria-cases</br  >
