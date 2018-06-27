@@ -14,6 +14,7 @@ My steps were as follows:</br  >
 Now we move on to the Data Visualization part with Tableau.</br  >
 </br  >
 Sunburst charts require data to be presented in a pivot table with Outline Form shown and all Item Labels repeated.</br  >
+<img src='https://github.com/PrithviKamath/Data-Visualizations/blob/master/Titanic%20Survisors%20with%20Tableau/Images/TitanicSunburst.png'></img>
 </br  >
 Reference:</br  >
 •	Titanic Survival Dataset: https://www.kaggle.com/c/titanic-survival/data</br  >
