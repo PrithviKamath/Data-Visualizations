@@ -1,0 +1,52 @@
+<html>
+<head>
+	<title>First try at D3.js</title>
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+</head>
+<body>
+	
+	<p>This is the first paragraph</p>
+	
+	<script>
+		d3.select("body")
+			.append("p")
+			.text("Hello World!")
+			.style("color","blue");
+		
+		//create canvas to add your vizsualizations to your html tag
+		var canvas=d3.select("body")
+					.append("svg")
+					.attr("width",350)
+					.attr("height",350);
+		
+		//add your circle to your canvas
+		var circle=canvas.append("circle")
+						.attr("cx",75)
+						.attr("cy",75)
+						.attr("r",25)
+						.attr("fill","red")
+						.style("stroke-width", 2)		//select border size
+						.style("stroke", "blue");
+		
+		//add rectangle to your canvas
+		var rectangle=canvas.append("rect")
+							.attr("x",150)
+							.attr("y",150)
+							.attr("height",50)
+							.attr("width",150)
+							.attr("style","outline: thick solid green")		//another method to create square border
+							.attr("fill","red");
+		
+		//add line to your canvas
+		var line=canvas.append("line")
+						.attr("x1",0)
+						.attr("y1",0)
+						.attr("x2",350)
+						.attr("y2",350)
+						.attr("stroke","grey")
+						.attr("stroke-width",5);
+		
+	</script>
+	
+</body>
+</html>
