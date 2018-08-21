@@ -11,7 +11,7 @@
 		d3.select("body")
 			.append("h2")
 			.text("Basic Spaces (Line, Circle, Rectangle) with borders")
-			.style("color","blue");
+			.style("color","grey");
 		
 		//create canvas to add your vizsualizations to your html tag
 		var canvas1=d3.select("body")
@@ -34,8 +34,8 @@
 							.attr("y",150)
 							.attr("height",50)
 							.attr("width",150)
-							.attr("style","outline: thick solid green")		//another method to create square border
-							.attr("fill","red");
+							.attr("style","outline: thick solid orange")		//another method to create square border
+							.attr("fill","#87cefa");
 		
 		//add line to your canvas
 		var line=canvas1.append("line")
@@ -43,7 +43,7 @@
 						.attr("y1",0)
 						.attr("x2",300)
 						.attr("y2",300)
-						.attr("stroke","grey")
+						.attr("stroke","yellow")
 						.attr("stroke-width",5);
 		
 		
@@ -55,7 +55,8 @@
 		
 		d3.select("body")
 			.append("h2")
-			.text("Vertical Bar Chart with X & Y axes")
+			.text("Vertical Bar Chart with X & Y axes and Labels")
+			.style("color","grey");
 			
 		//create canvas to add your vizsualizations to your html tag
 		var canvas2=d3.select("body")
@@ -97,19 +98,37 @@
 							.attr("x",function(d,i){return i*50;})
 							.attr("width",30)
 							.attr("y",function(d){return yScale(d);})
-							.attr("height",function(d){return bheight-yScale(d);})
-							.style("fill",function(d){return colorScale(d)});
-							
+							.attr("height",function(d){return 0;});
 		
+
+		//Adding lables
+		canvas2.selectAll("text")
+				.data(dataset)
+				.enter()
+					.append("text")
+					.attr("fill","red")
+					.attr("x",function(d,i){return i*50 + 4;})
+					.attr("y",function(d){return yScale(d)-4;})
+					.text(function(d) {return d})
+							
 								  
 		//Adding X & Y axis to the canvas
 		canvas2.append("g")
-				.attr("transform","translate(0,205)")		//position of X axis (0,height + padding)
+				.attr("transform","translate(0,203)")		//position of X axis (0,height + padding)
 				.call(x_axis);
 				
 		canvas2.append("g")
-				.attr("transform","translate(0,0)")			//position of Y axis (0,0)
+				.attr("transform","translate(-3,0)")			//position of Y axis (0,0)
 				.call(y_axis);
+				
+				
+		//Adding transition to bars
+		bars.transition()
+			.duration(2500)
+			.delay(500)
+			.attr("height", function(d){return bheight-yScale(d);})
+			.each("end", function(){d3.select(this).style("fill",function(d){return colorScale(d)})}); //fill color added at the end of the transition
+			
 	</script>
 
 
