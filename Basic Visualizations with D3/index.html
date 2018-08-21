@@ -5,22 +5,22 @@
 </head>
 <body>
 	
-	<p>This is the first paragraph</p>
+	<p>A test paragraph in html</p>
 	
 	<script>
 		d3.select("body")
-			.append("p")
-			.text("Hello World!")
+			.append("h2")
+			.text("Basic Spaces (Line, Circle, Rectangle) with borders")
 			.style("color","blue");
 		
 		//create canvas to add your vizsualizations to your html tag
-		var canvas=d3.select("body")
+		var canvas1=d3.select("body")
 					.append("svg")
 					.attr("width",350)
 					.attr("height",350);
 		
 		//add your circle to your canvas
-		var circle=canvas.append("circle")
+		var circle=canvas1.append("circle")
 						.attr("cx",75)
 						.attr("cy",75)
 						.attr("r",25)
@@ -29,7 +29,7 @@
 						.style("stroke", "blue");
 		
 		//add rectangle to your canvas
-		var rectangle=canvas.append("rect")
+		var rectangle=canvas1.append("rect")
 							.attr("x",150)
 							.attr("y",150)
 							.attr("height",50)
@@ -38,15 +38,80 @@
 							.attr("fill","red");
 		
 		//add line to your canvas
-		var line=canvas.append("line")
+		var line=canvas1.append("line")
 						.attr("x1",0)
 						.attr("y1",0)
-						.attr("x2",350)
-						.attr("y2",350)
+						.attr("x2",300)
+						.attr("y2",300)
 						.attr("stroke","grey")
 						.attr("stroke-width",5);
 		
+		
+		//dataset
+		var dataset=[30,50,40,60,60,30,40,50,70,50,60,40]
+		
+		var cwidth=700
+		var cheigth=400
+		
+		d3.select("body")
+			.append("h2")
+			.text("Vertical Bar Chart with X & Y axes")
+			
+		//create canvas to add your vizsualizations to your html tag
+		var canvas2=d3.select("body")
+					.append("svg")
+					.attr("width",cwidth)
+					.attr("height",cheigth)
+					.append("g")		//create a group and add transformation to move 50 pixels to right and 50 pixels below for axes
+					.attr("transform","translate(50,50)");
+		
+		//Bar chart
+		var bheight=200
+		
+		var xMax=575
+		var xScale=d3.scale.linear()
+						.domain([0,11])
+						.range([0,xMax]);
+		
+		var x_axis=d3.svg.axis()
+					.orient("bottom")
+					.scale(xScale);
+		
+		var yMax = d3.max(dataset, function(d){return d});			
+		var yScale = d3.scale.linear()
+					.domain([0,yMax])
+					.range([bheight,0]);
+					
+		var y_axis = d3.svg.axis()
+					.orient("left")
+                  .scale(yScale);
+					
+		var colorScale = d3.scale.linear()
+					.domain([0,yMax])
+					.range(["#87cefa","#191970"]);
+		
+		var bars=canvas2.selectAll("rect")
+						.data(dataset)
+						.enter()
+							.append("rect")
+							.attr("x",function(d,i){return i*50;})
+							.attr("width",30)
+							.attr("y",function(d){return yScale(d);})
+							.attr("height",function(d){return bheight-yScale(d);})
+							.style("fill",function(d){return colorScale(d)});
+							
+		
+								  
+		//Adding X & Y axis to the canvas
+		canvas2.append("g")
+				.attr("transform","translate(0,205)")		//position of X axis (0,height + padding)
+				.call(x_axis);
+				
+		canvas2.append("g")
+				.attr("transform","translate(0,0)")			//position of Y axis (0,0)
+				.call(y_axis);
 	</script>
-	
+
+
 </body>
 </html>
