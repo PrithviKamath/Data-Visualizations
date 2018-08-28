@@ -10,7 +10,7 @@
 	<script>
 		d3.select("body")
 			.append("h2")
-			.text("Basic Spaces (Line, Circle, Rectangle) with borders")
+			.text("Basic Spaces (Line, Circle, Arc, Rectangle) with borders")
 			.style("color","grey");
 		
 		//create canvas to add your vizsualizations to your html tag
@@ -27,6 +27,25 @@
 						.attr("fill","red")
 						.style("stroke-width", 2)		//select border size
 						.style("stroke", "blue");
+						
+		//add an arc to your canvas
+		var group=canvas1.append("g")						//arc is used in a group so that it can be moved using transform function
+					.attr("transform","translate(225,75)")
+		
+		var r=40;
+		var p=Math.PI*2;
+		var arc=d3.svg.arc()
+				.innerRadius(r-20)
+				.outerRadius(r)
+				.startAngle(0)
+				.endAngle(p-2);
+				
+		group.append("path")
+				.attr("d", arc)
+				.attr("fill","green")
+				.style("stroke-width", 2)
+				.style("stroke", "red");
+		
 		
 		//add rectangle to your canvas
 		var rectangle=canvas1.append("rect")
@@ -46,12 +65,11 @@
 						.attr("stroke","yellow")
 						.attr("stroke-width",5);
 		
-		
 		//dataset
 		var dataset=[30,50,40,60,60,30,40,50,70,50,60,40]
 		
 		var cwidth=700
-		var cheigth=400
+		var cheigth=300
 		
 		d3.select("body")
 			.append("h2")
@@ -100,7 +118,6 @@
 							.attr("y",function(d){return yScale(d);})
 							.attr("height",function(d){return 0;});
 		
-
 		//Adding lables
 		canvas2.selectAll("text")
 				.data(dataset)
@@ -110,8 +127,7 @@
 					.attr("x",function(d,i){return i*50 + 4;})
 					.attr("y",function(d){return yScale(d)-4;})
 					.text(function(d) {return d})
-							
-								  
+										  
 		//Adding X & Y axis to the canvas
 		canvas2.append("g")
 				.attr("transform","translate(0,203)")		//position of X axis (0,height + padding)
@@ -121,14 +137,88 @@
 				.attr("transform","translate(-3,0)")			//position of Y axis (0,0)
 				.call(y_axis);
 				
-				
 		//Adding transition to bars
 		bars.transition()
 			.duration(2500)
 			.delay(500)
 			.attr("height", function(d){return bheight-yScale(d);})
-			.each("end", function(){d3.select(this).style("fill",function(d){return colorScale(d)})}); //fill color added at the end of the transition
-			
+			.each("end", function(){d3.select(this).style("fill",function(d){return colorScale(d);})}); //fill color added at the end of the transition
+		
+		
+		//Create Donut chart
+		d3.select("body")
+			.append("h2")
+			.text("Donut Chart on original dataset and frequency of dataset")
+			.style("color","grey");
+		
+		
+		var cwidth3=700;
+		var cheigth3=300
+		
+		var canvas3= d3.select("body")
+						.append("svg")
+						.attr("width",cwidth3)
+						.attr("height",cheigth3);
+		
+		var group =canvas3.append("g")
+						.attr("transform","translate(300,140)");
+		
+		var arc=d3.svg.arc()
+					.innerRadius(60)
+					.outerRadius(80);
+					
+		var pie= d3.layout.pie()
+				.value(function(d) {return d;}).sort(null);
+		
+		var arcs=group.selectAll(".arc")
+				.data(pie(dataset))
+				.enter()
+				.append("g")
+				.attr("class","arc");
+		
+		arcs.append("path")
+			.attr("d",arc)
+			.attr("fill", function(d) {return colorScale(d.data);});
+		
+		arcs.append("text")
+			.attr("transform", function(d) {return "translate(" + arc.centroid(d) +")";})
+			.attr("text-anchor","middle")
+			.text(function(d) {return d.data;});
+
+		
+		//Get count based on frequency
+		var counts = {};
+		dataset.forEach(function(d) {
+		if (!counts[d]) { counts[d] = 0;}
+		counts[d]++;
+		});
+				
+		var data = d3.entries(counts);
+				
+		var group=canvas3.append('g')
+				.attr("transform","translate(300,140)");
+
+		var arc = d3.svg.arc()
+				.innerRadius(130)
+				.outerRadius(110);
+
+		var pie = d3.layout.pie()
+					.value(function(d) {return d.value;})
+					.sort(null);
+		
+		var path = group.selectAll('path')
+				.data(pie(data))
+				.enter()
+				.append('path')
+				.attr('d', arc)
+				.attr('fill', function(d) {return colorScale(d.data.key);})
+				.text(function(d) {return d.data.key;});
+		
+		/*path.append("text")
+			.attr("transform", function(d) {return "translate(" + arc.centroid(d) +")";})
+			.attr("text-anchor","middle")
+			.text(function(d) {return d.data;});*/
+
 	</script>
 
 
