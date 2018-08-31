@@ -10,7 +10,7 @@
 	<script>
 		d3.select("body")
 			.append("h2")
-			.text("Basic Spaces (Line, Circle, Arc, Rectangle) with borders")
+			.text("Basic Spaces (Line, Circle, Arc, Rectangle, Curve) with borders")
 			.style("color","grey");
 		
 		//create canvas to add your vizsualizations to your html tag
@@ -64,6 +64,16 @@
 						.attr("y2",300)
 						.attr("stroke","yellow")
 						.attr("stroke-width",5);
+						
+		//add a curve line
+		var diagonal=d3.svg.diagonal()
+						.source({x:150, y:75})
+						.target({x:25,y:300});
+						
+		canvas1.append("path")
+				.attr("fill","none")
+				.attr("stroke","black")
+				.attr("d",diagonal);
 		
 		//dataset
 		var dataset=[30,50,40,60,60,30,40,50,70,50,60,40]
@@ -218,6 +228,58 @@
 			.attr("transform", function(d) {return "translate(" + arc.centroid(d) +")";})
 			.attr("text-anchor","middle")
 			.text(function(d) {return d.data;});*/
+		
+		
+		//Creating a tree/hierarchy graph from json file
+		d3.select("body")
+			.append("h2")
+			.text("Tree/ Hierarchy graph from json file")
+			.style("color","grey");
+			
+		var cwidth4=500;
+		var cheigth4=400;
+		
+		var canvas4= d3.select("body")
+						.append("svg")
+						.attr("width",cwidth4)
+						.attr("height",cheigth4)
+						.append("g")
+						.attr("transform","translate(50,0)");
+						
+		var tree=d3.layout.tree()			//replace tree by cluster to move parent without children to the leaf node level
+					.size([300,400]);
+					
+		d3.json("friends.json",function(data){
+			var nodes=tree.nodes(data);
+			var links=tree.links(nodes);
+			
+			var node=canvas4.selectAll(".node")
+							.data(nodes)
+							.enter()
+							.append("g")
+							.attr("class","node")
+							.attr("transform", function(d) {return "translate(" + d.y + "," + d.x + ")";})	
+							
+			node.append("circle")
+				.attr("r",5)
+				.attr("fill","steelblue");
+				
+			node.append("text")
+				.text(function(d) {return d.name;})
+				
+			var diagonal=d3.svg.diagonal()
+							.projection(function(d) {return [d.y, d.x] });;
+				
+				canvas4.selectAll(".link")
+						.data(links)
+						.enter()
+						.append("path")
+						.attr("class","link")
+						.attr("fill","none")
+						.attr("stroke","black")
+						.attr("d",diagonal);
+		
+		})
 
 	</script>
 
