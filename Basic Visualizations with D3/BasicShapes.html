@@ -1,7 +1,9 @@
 <html>
 <head>
 	<title>First try at D3.js</title>
-	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<!--<script src="http://d3js.org/d3.v3.min.js"></script>-->
+	<script src='https://d3js.org/d3.v5.min.js'></script>
+	<script src="//d3js.org/d3.v4.min.js"></script>
 </head>
 <body>
 	
@@ -34,7 +36,7 @@
 		
 		var r=40;
 		var p=Math.PI*2;
-		var arc=d3.svg.arc()
+		var arc=d3.arc()
 				.innerRadius(r-20)
 				.outerRadius(r)
 				.startAngle(0)
@@ -66,14 +68,22 @@
 						.attr("stroke-width",5);
 						
 		//add a curve line
-		var diagonal=d3.svg.diagonal()
-						.source({x:150, y:75})
-						.target({x:25,y:300});
-						
+		var link = d3.linkHorizontal()
+				  .x(function(d) {
+					return d.x;
+				  })
+				  .y(function(d) {
+					return d.y;
+				  });
+
+		var data = {
+		  source: {x: 150,y: 75},
+		  target: {x: 25,y: 300}};
+		
 		canvas1.append("path")
 				.attr("fill","none")
 				.attr("stroke","black")
-				.attr("d",diagonal);
+				.attr("d", link(data));
 		
 		//dataset
 		var dataset=[30,50,40,60,60,30,40,50,70,50,60,40]
@@ -84,6 +94,11 @@
 		d3.select("body")
 			.append("h2")
 			.text("Vertical Bar Chart with X & Y axes and Labels")
+			.style("color","grey");
+			
+		d3.select("body")
+			.append("h2")
+			.text("Transition in bar chart")
 			.style("color","grey");
 			
 		//create canvas to add your vizsualizations to your html tag
@@ -98,24 +113,22 @@
 		var bheight=200
 		
 		var xMax=575
-		var xScale=d3.scale.linear()
+		var xScale=d3.scaleLinear()
 						.domain([0,11])
 						.range([0,xMax]);
 		
-		var x_axis=d3.svg.axis()
-					.orient("bottom")
+		var x_axis=d3.axisBottom()
 					.scale(xScale);
 		
 		var yMax = d3.max(dataset, function(d){return d});			
-		var yScale = d3.scale.linear()
+		var yScale = d3.scaleLinear()
 					.domain([0,yMax])
 					.range([bheight,0]);
 					
-		var y_axis = d3.svg.axis()
-					.orient("left")
-                  .scale(yScale);
+		var y_axis = d3.axisLeft()
+					.scale(yScale);
 					
-		var colorScale = d3.scale.linear()
+		var colorScale = d3.scaleLinear()
 					.domain([0,yMax])
 					.range(["#87cefa","#191970"]);
 		
@@ -152,7 +165,9 @@
 			.duration(2500)
 			.delay(500)
 			.attr("height", function(d){return bheight-yScale(d);})
-			.each("end", function(){d3.select(this).style("fill",function(d){return colorScale(d);})}); //fill color added at the end of the transition
+			.on("end", function(){d3.select(this)
+									.style("fill",function(d){
+												return colorScale(d);})}); //fill color added at the end of the transition
 		
 		
 		//Create Donut chart
@@ -162,7 +177,7 @@
 			.style("color","grey");
 		
 		
-		var cwidth3=700;
+		var cwidth3=700
 		var cheigth3=300
 		
 		var canvas3= d3.select("body")
@@ -173,11 +188,11 @@
 		var group =canvas3.append("g")
 						.attr("transform","translate(300,140)");
 		
-		var arc=d3.svg.arc()
-					.innerRadius(60)
+		var arc=d3.arc()
+					.innerRadius(50)
 					.outerRadius(80);
 					
-		var pie= d3.layout.pie()
+		var pie= d3.pie()
 				.value(function(d) {return d;}).sort(null);
 		
 		var arcs=group.selectAll(".arc")
@@ -192,6 +207,7 @@
 		
 		arcs.append("text")
 			.attr("transform", function(d) {return "translate(" + arc.centroid(d) +")";})
+			.attr("fill","white")
 			.attr("text-anchor","middle")
 			.text(function(d) {return d.data;});
 
@@ -208,26 +224,30 @@
 		var group=canvas3.append('g')
 				.attr("transform","translate(300,140)");
 
-		var arc = d3.svg.arc()
+		var arc = d3.arc()
 				.innerRadius(130)
-				.outerRadius(110);
+				.outerRadius(100);
 
-		var pie = d3.layout.pie()
+		var pie = d3.pie()
 					.value(function(d) {return d.value;})
 					.sort(null);
 		
-		var path = group.selectAll('path')
+		var arcs = group.selectAll('.arc')
 				.data(pie(data))
 				.enter()
-				.append('path')
-				.attr('d', arc)
+				.append('g')
+				.attr("class","arc")
+				
+		arcs.append("path")
+				.attr("d",arc)
 				.attr('fill', function(d) {return colorScale(d.data.key);})
-				.text(function(d) {return d.data.key;});
 		
-		/*path.append("text")
+		
+		arcs.append("text")
 			.attr("transform", function(d) {return "translate(" + arc.centroid(d) +")";})
+			.attr("fill","white")
 			.attr("text-anchor","middle")
-			.text(function(d) {return d.data;});*/
+			.text(function(d,i) {return data[i].key;});
 		
 		
 		//Creating a tree/hierarchy graph from json file
