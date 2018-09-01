@@ -14,3 +14,4 @@
 <br />
 <b>References:</b> <br />
 •	Video tutorials by Vienno (https://www.youtube.com/channel/UCNYL0ZF2j8-OSGZ4iHBLNPA)
+•	Making an interactive bubble chart with D3 v4 by Jonathan Soma (https://www.youtube.com/watch?v=lPr60pexvEM&t=262s)
