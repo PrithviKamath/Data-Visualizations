@@ -4,7 +4,7 @@
 <br />
 <img src='https://github.com/PrithviKamath/Data-Visualizations/blob/master/Basic%20Visualizations%20with%20D3/Images/Shapes.PNG'></img>
  <br />
-<img src='https://github.com/PrithviKamath/Data-Visualizations/blob/master/Basic%20Visualizations%20with%20D3/Images/BarChart.PNG'></img>
+<img src='https://github.com/PrithviKamath/Data-Visualizations/blob/master/Basic%20Visualizations%20with%20D3/Images/BarGraph.PNG'></img>
  <br />
 <img src='https://github.com/PrithviKamath/Data-Visualizations/blob/master/Basic%20Visualizations%20with%20D3/Images/PieChart.PNG'></img>
  <br />
