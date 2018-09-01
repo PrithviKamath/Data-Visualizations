@@ -266,38 +266,60 @@
 						.append("g")
 						.attr("transform","translate(50,0)");
 						
-		var tree=d3.layout.tree()			//replace tree by cluster to move parent without children to the leaf node level
-					.size([300,400]);
+		//replace tree by cluster to move parent without children to the leaf node level
+		var tree=d3.tree()
+					.size([300,300]);
 					
-		d3.json("friends.json",function(data){
-			var nodes=tree.nodes(data);
-			var links=tree.links(nodes);
+		// load the external data
+		d3.json("friends.json", function(error, friends) {
+					if (error) throw error;
 			
-			var node=canvas4.selectAll(".node")
-							.data(nodes)
-							.enter()
-							.append("g")
-							.attr("class","node")
-							.attr("transform", function(d) {return "translate(" + d.y + "," + d.x + ")";})	
+		// assigns the data to a hierarchy using parent-child relationships
+		var nodes = d3.hierarchy(friends, function(d) {
+			return d.children;});
+			
+		// maps the node data to the tree layout
+		nodes = tree(nodes);
+		console.log(nodes)
+		
+		//var nodes=tree.nodes(data);
+		//var links=tree.links(nodes);
+			
+		// adds the links between the nodes
+		var link = canvas4.selectAll(".link")
+				.data( nodes.descendants().slice(1))
+				.enter().append("path")
+				.attr("class", "link")
+				.attr("fill","none")
+				.attr("stroke","black")
+				.attr("d", function(d) {
+				   return "M" + d.y + "," + d.x
+					 + "C" + (d.y + d.parent.y)/2 + "," + d.x
+					 + " " + (d.y + d.parent.y)/2 + "," + d.parent.x
+					 + " " + d.parent.y + "," + d.parent.x;
+				   });
+		
+
+		var node=canvas4.selectAll(".node")
+							.data(nodes.descendants())
+							.enter().append("g")
+							.attr("class", function(d) { 
+							  return "node" + 
+							  (d.children ? " node--internal" : " node--leaf"); })
+							.attr("transform", function(d) { 
+							  return "translate(" + d.y + "," + d.x + ")"; });	
 							
 			node.append("circle")
 				.attr("r",5)
 				.attr("fill","steelblue");
 				
 			node.append("text")
-				.text(function(d) {return d.name;})
-				
-			var diagonal=d3.svg.diagonal()
-							.projection(function(d) {return [d.y, d.x] });;
-				
-				canvas4.selectAll(".link")
-						.data(links)
-						.enter()
-						.append("path")
-						.attr("class","link")
-						.attr("fill","none")
-						.attr("stroke","black")
-						.attr("d",diagonal);
+				.data(nodes.descendants())
+				.attr("fill","black")
+				.style("font-size", "20px")
+				.attr("text-anchor","middle")
+				.text(function(d) {return d.data.name;})
+			
 		
 		})
 
