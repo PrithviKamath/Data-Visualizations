@@ -18,6 +18,9 @@ Sunburst charts require data to be presented in a pivot table with Outline Form 
 Once the required data is ready, it is imported in Tableau and Calculated Measures are created to get the required structure. </br >
 <img src='https://github.com/PrithviKamath/Data-Visualizations/blob/master/Sunburst%20Chart%20with%20Tableau/Images/TitanicSunburst.png'></img>
 </br  >
+For an interactive dashboard experience kindly visit by Tableau Public profile at 
+https://public.tableau.com/profile/prithvi.kamath#!/vizhome/SunburstonTitanic/Dashboard1 </br >
+</br >
 Reference:</br  >
 •	Titanic Survival Dataset: https://www.kaggle.com/c/titanic-survival/data</br  >
 •	https://www.superdatascience.com/yt-tableau-custom-charts-series/</br  >
